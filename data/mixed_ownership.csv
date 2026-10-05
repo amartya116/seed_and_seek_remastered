@@ -1,0 +1,21 @@
+nation,town,pop,people,area,gdp,tier,capital
+Japan,Osaka,124500000,2752412,377975,4213,high,no
+Brazil,Rio de Janeiro,203080756,6211423,8515767,2174,upper-middle,no
+Spain,Valencia,48600000,807693,505990,1581,high,no
+Canada,Toronto,40100000,2794356,9984670,2140,high,no
+Poland,Krakow,36700000,806201,312696,811,high,no
+Japan,Tokyo,124500000,9733276,377975,4213,high,yes
+Brazil,Brasilia,203080756,2817068,8515767,2174,upper-middle,yes
+Spain,Seville,48600000,681998,505990,1581,high,no
+Canada,Montreal,40100000,1762949,9984670,2140,high,no
+Poland,Wroclaw,36700000,674079,312696,811,high,no
+Japan,Yokohama,124500000,3772029,377975,4213,high,no
+Brazil,Sao Paulo,203080756,11451245,8515767,2174,upper-middle,no
+Spain,Madrid,48600000,3332035,505990,1581,high,yes
+Canada,Ottawa,40100000,1017449,9984670,2140,high,yes
+Poland,Warsaw,36700000,1861975,312696,811,high,yes
+Japan,Nagoya,124500000,2332176,377975,4213,high,no
+Brazil,Fortaleza,203080756,2428678,8515767,2174,upper-middle,no
+Spain,Barcelona,48600000,1660122,505990,1581,high,no
+Canada,Calgary,40100000,1306784,9984670,2140,high,no
+Poland,Lodz,36700000,655279,312696,811,high,no
