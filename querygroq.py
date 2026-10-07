@@ -173,10 +173,23 @@ def describe_columns(stats, model=MODEL):
     return [c.model_dump() for c in columns]
 
 
+def non_derived_column_queries(columns):
+    return [
+        {
+            "column": column["column"],
+            "description": column["description"],
+            "query": column["query"],
+        }
+        for column in columns
+        if column["is_derived"] is False
+    ]
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--stats", default="output/profiler_output.json")
     parser.add_argument("--output", "-o", default="output/column_queries_groq.json")
+    parser.add_argument("--non-derived-output")
     parser.add_argument("--model", default=MODEL)
     args = parser.parse_args()
 
@@ -187,11 +200,23 @@ def main():
     with open(args.stats, encoding="utf-8") as f:
         stats = json.load(f)
 
-    text = json.dumps(describe_columns(stats, args.model), indent=2, ensure_ascii=False)
-    print(text)
+    columns = describe_columns(stats, args.model)
+    text = json.dumps(columns, indent=2, ensure_ascii=False)
     os.makedirs(os.path.dirname(args.output) or ".", exist_ok=True)
     with open(args.output, "w", encoding="utf-8") as f:
         f.write(text + "\n")
+
+    non_derived_output = args.non_derived_output
+    if non_derived_output is None:
+        output_root, output_extension = os.path.splitext(args.output)
+        non_derived_output = f"{output_root}_non_derived{output_extension}"
+    non_derived_text = json.dumps(non_derived_column_queries(columns), indent=2, ensure_ascii=False)
+    os.makedirs(os.path.dirname(non_derived_output) or ".", exist_ok=True)
+    with open(non_derived_output, "w", encoding="utf-8") as f:
+        f.write(non_derived_text + "\n")
+
+    print(text)
+    print(f"Non-derived column queries written to {non_derived_output}")
 
 
 if __name__ == "__main__":
