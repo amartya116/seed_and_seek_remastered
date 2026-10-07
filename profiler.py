@@ -114,8 +114,8 @@ def main() -> None:
     parser.add_argument(
         "input",
         nargs="?",
-        default="data/mixed_ownership.csv",
-        help="CSV file to profile (default: data/example_seed.csv)",
+        default="data/List_of_countries_by_life_expectancy__t4.csv",
+        help="CSV file to profile (default: data/List_of_countries_by_life_expectancy__t4.csv)",
     )
     parser.add_argument("--output", "-o",
                          nargs="?",

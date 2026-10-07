@@ -19,7 +19,7 @@ import os
 from google import genai
 from google.genai import types
 
-MODEL = "gemini-3.5-flash"
+MODEL = "gemini-3.7-flash"
 
 
 def load_dotenv(path: str = ".env") -> None:
@@ -59,7 +59,7 @@ Pass 2: write one natural-language description for EVERY column, in original ord
 - "relations": how the owning entity relates to the others (e.g. "city belongs to country")
 - "query": a natural-language question about this column mentioning its owner and value
 
-Decide ownership ONLY from the sample row groups, not from your prior knowledge of the world. Look at the rows inside each group: if a column has the SAME value in every row of a group, it is a property of that group's shared entity (the coarser one). If it DIFFERS between rows of the group, it is a property of a finer entity (the one the rows differ by). Example: rows sharing country=X with identical population => population belongs to the country, even though cities appear in the row. Return only a JSON array."""
+Decide ownership ONLY from the sample row groups and also prior knowledge of the world. Look at the rows inside each group: if a column has the SAME value in every row of a group, it is a property of that group's shared entity (the coarser one). If it DIFFERS between rows of the group, it is a property of a finer entity (the one the rows differ by). Example: rows sharing country=X with identical population => population belongs to the country, even though cities appear in the row. Return only a JSON array."""
 
 
 def ask(client, prompt: str, model: str):
