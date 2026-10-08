@@ -5,3 +5,4 @@ __pycache__/
 output/
 seed_signature.json
 .env
+preprocessing/data/
