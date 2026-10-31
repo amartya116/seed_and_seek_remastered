@@ -1,9 +1,11 @@
-"""Search indexed Wikipedia descriptions using unchanged query.py/querygroq.py JSON.
+"""Score every query from query.py/querygroq.py JSON against every indexed table card.
 
     python retrieve_chroma.py --queries output/column_queries.json
     python retrieve_chroma.py --queries output/column_queries_groq.json
 
-Outputs transparent search hits only. No matching or augmentation is performed.
+Outputs a queries x tables matrix (rows q1..qN, columns T1..TM) whose entries are cosine
+similarity scores (1 - cosine distance, higher is better), as JSON and CSV.
+No matching or augmentation is performed.
 """
 from __future__ import annotations
 
@@ -34,15 +36,28 @@ def load_queries(path):
     return queries
 
 
+def build_matrix(tables, vectors):
+    """Score every query vector against every table card: returns (table labels, rows of 1 - cosine distance)."""
+    ids = tables.get(include=[])['ids']
+    labels = {}
+    scores = []
+    for vec in vectors:
+        result = tables.query(query_embeddings=[vec], n_results=len(ids), include=['metadatas', 'distances'])
+        by_id = {rid: 1.0 - float(d) for rid, d in zip(result['ids'][0], result['distances'][0])}
+        for rid, m in zip(result['ids'][0], result['metadatas'][0]):
+            labels.setdefault(rid, (m or {}).get('table_id') or rid)
+        scores.append(by_id)
+    order = sorted(labels, key=lambda rid: labels[rid])
+    return [labels[rid] for rid in order], [[row[rid] for rid in order] for row in scores]
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--queries', default='output/column_queries.json')
     p.add_argument('--chroma', default='data/chroma_seed_seek')
-    p.add_argument('--output', default='output/retrieval_results.json')
-    p.add_argument('--top-k', type=int, default=10)
+    p.add_argument('--output', default='output/score_matrix.json')
+    p.add_argument('--csv', default='output/score_matrix.csv')
     args = p.parse_args()
-    if args.top_k < 1:
-        p.error('--top-k must be positive')
     input_path = Path(args.queries)
     q_items = load_queries(input_path)
     if not Path(args.chroma).is_dir():
@@ -50,44 +65,35 @@ def main():
     import chromadb
     from sentence_transformers import SentenceTransformer
     client = chromadb.PersistentClient(path=str(Path(args.chroma)))
-    collections = {}
-    for name in ('table_cards', 'column_cards'):
-        c = client.get_collection(name=name)
-        if c.count() > 0:
-            collections[name] = c
-    if not collections:
-        raise RuntimeError('No indexed cards found')
-    model_names = {(c.metadata or {}).get('embedding_model') for c in collections.values()}
-    if len(model_names) != 1 or None in model_names:
-        raise RuntimeError('Collection embedding model metadata missing or inconsistent')
-    model_name = model_names.pop()
-    for name, c in collections.items():
-        if (c.metadata or {}).get('hnsw:space') != 'cosine':
-            raise RuntimeError(f'{name} is not configured for cosine distance')
+    tables = client.get_collection(name='table_cards')
+    if tables.count() == 0:
+        raise RuntimeError('No indexed table cards found')
+    meta = tables.metadata or {}
+    model_name = meta.get('embedding_model')
+    if not model_name:
+        raise RuntimeError('table_cards embedding model metadata missing')
+    if meta.get('hnsw:space') != 'cosine':
+        raise RuntimeError('table_cards is not configured for cosine distance')
     model = SentenceTransformer(model_name)
     vectors = model.encode([x['query'] for x in q_items], normalize_embeddings=True).tolist()
-    output = {'embedding_model': model_name, 'metric': 'cosine', 'query_source': str(input_path),
-              'note': 'Cosine distance: lower is better; hits are candidates, not verified join matches.', 'searches': []}
-    for item, vec in zip(q_items, vectors):
-        hits = []
-        for name, c in collections.items():
-            result = c.query(query_embeddings=[vec], n_results=min(args.top_k, c.count()),
-                             include=['metadatas','documents','distances'])
-            for rid, doc, meta, distance in zip(result['ids'][0], result['documents'][0],
-                                                 result['metadatas'][0], result['distances'][0]):
-                hits.append({'collection': name, 'card_id': rid, 'table_id': meta.get('table_id'),
-                             'column_name': meta.get('column_name'), 'description': doc,
-                             'metadata': meta, 'cosine_distance': float(distance)})
-        hits.sort(key=lambda x: x['cosine_distance'])
-        output['searches'].append({**item, 'hits': hits})
+    table_labels, scores = build_matrix(tables, vectors)
+
+    output = {'embedding_model': model_name, 'metric': 'cosine similarity (1 - cosine distance), higher is better',
+              'query_source': str(input_path),
+              'queries': [{'id': f'q{i}', **x} for i, x in enumerate(q_items, 1)],
+              'tables': table_labels, 'scores': scores}
     target = Path(args.output)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(output, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
-    print(f"Saved {len(output['searches'])} searches to {target}")
-    for s in output['searches']:
-        print(f"\n{s['seed_column']}: {s['query']}")
-        for h in s['hits'][:5]:
-            print(f"  {h['cosine_distance']:.3f}  {h['collection']}  {h['table_id']}  {h.get('column_name') or ''}")
+
+    import pandas as pd
+    df = pd.DataFrame(scores, columns=table_labels, index=[q['id'] for q in output['queries']])
+    df.insert(0, 'query', [q['query'] for q in output['queries']])
+    csv_target = Path(args.csv)
+    csv_target.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(csv_target, index_label='id', encoding='utf-8')
+    print(f'Saved {len(q_items)} x {len(table_labels)} score matrix to {target} and {csv_target}')
+    print(df.drop(columns='query').round(3).to_string())
 
 
 if __name__ == '__main__':
