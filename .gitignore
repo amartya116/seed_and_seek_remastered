@@ -6,3 +6,5 @@ output/
 seed_signature.json
 .env
 preprocessing/data/
+data/seedandseek.duckdb
+data/chroma_seed_seek/

@@ -58,7 +58,7 @@ Run from the project root; paths are relative to it.
 | Clean (units, multipliers, types) | `preprocessing/clean.py` | `data/tables` → `data/clean`, `clean_metadata.json` |
 | Quality: TabPFN imputation + outlier scores | `preprocessing/quality.py` | `data/clean` → `data/imputed`, `imputed_metadata.json`, `outliers.json` |
 | Store | `preprocessing/dbms_store.py` | `data/imputed` → `data/seedandseek.duckdb` (`table_registry`, `column_registry`, one `t_*` table per source table) |
-| Describe + embed into Chroma | `index_chroma.py` | DuckDB → `data/chroma_seed_seek` (`table_cards`, `column_cards`) — **not in the repo yet** |
+| Describe + embed into Chroma | `index_chroma.py` | DuckDB → `data/chroma_seed_seek` (`table_cards`, `column_cards`) |
 
 The Chroma collections must record `embedding_model` in their metadata and use cosine distance
 (`hnsw:space = cosine`); `retrieve_chroma.py` refuses to run otherwise, so queries are always
@@ -83,6 +83,9 @@ python equationextractorforembedding.py                # -> output/column_relati
 
 Put API keys in a `.env` file next to the scripts (it is git-ignored).
 
+To run steps 1-2 on every table at once: `python run_all_tables.py` (profiler + querygroq, writes
+`output/tables/<table>/`) and `python run_all_gemini.py` (query.py for every table, same folders).
+
 ### 3. Match queries against the index
 
 ```
@@ -92,8 +95,6 @@ python retrieve_chroma.py --queries output/column_queries_groq.json
 Embeds each query and scores it against **every** table card, so there are no gaps. Output is a
 matrix with rows `q1…qN` and columns `T1…TM`; each entry is cosine similarity × 100 (higher is
 better). Written to `output/score_matrix.json` and `output/score_matrix.csv`.
-
-Needs `sentence-transformers` (not in `requirements.txt` yet).
 
 ### 4. Sample the tables that satisfy the queries
 
@@ -127,9 +128,9 @@ DuckDB map 1:1, the appended values are the stored true values.
 |---|---|
 | Scrape / clean / quality / DuckDB store | done |
 | Seed profiling, query generation, relation equations | done |
-| Chroma indexing (`index_chroma.py`) | **missing from the repo** — `retrieve_chroma.py` expects it |
-| Score matrix (`retrieve_chroma.py`) | done, not yet run against a real index |
-| Table selection (`select_tables.py`) | done, tested on synthetic matrices |
+| Chroma indexing (`index_chroma.py`) | done: 10 table cards, 68 column cards |
+| Score matrix (`retrieve_chroma.py`) | done, tested against the real index |
+| Table selection (`select_tables.py`) | done; runs on the real index, but key-column queries (e.g. country name) pull in unrelated tables |
 | Relation-aware selection (using `belongs_to` / `subset_of`) | not yet; selection currently uses scores only |
 | Augmentation from DuckDB | not built |
 
@@ -137,11 +138,7 @@ DuckDB map 1:1, the appended values are the stored true values.
 
 ```
 pip install -r requirements.txt
-pip install sentence-transformers chromadb
 ```
-
-`chromadb` and `sentence-transformers` are used by the retrieval step but are not listed in
-`requirements.txt` yet.
 
 ## Layout
 
