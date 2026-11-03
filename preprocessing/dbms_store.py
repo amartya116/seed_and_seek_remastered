@@ -5,11 +5,13 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 
+from clean import normalize_key
+
 # Display settings: only change how tables look when printed, not the data
 pd.set_option("display.max_columns", None)  # show all columns instead of hiding some with "..."
 pd.set_option("display.width", 200)         # allow wider lines so tables don't wrap too early
 
-CLEAN_DIR = Path("data/imputed")
+INPUT_DIR = Path("data/imputed")
 DB_PATH = Path("data/seedandseek.duckdb")
 
 
@@ -100,15 +102,16 @@ def load_table(table_id):
 
 # ---------- Main ----------
 
-def load_clean_metadata():
-    return json.loads((CLEAN_DIR / "imputed_metadata.json").read_text(encoding="utf-8"))
+def load_metadata():
+    return json.loads((INPUT_DIR / "imputed_metadata.json").read_text(encoding="utf-8"))
+
 
 def main():
     con = connect()
     create_registries(con)
 
-    for meta in load_clean_metadata():
-        df = pd.read_csv(CLEAN_DIR / f"{meta['table_id']}.csv")
+    for meta in load_metadata():
+        df = pd.read_csv(INPUT_DIR / f"{meta['table_id']}.csv")
         store_table(con, meta, df)
         print(f"Stored {meta['table_id']} ({len(df)} rows)")
 
@@ -120,21 +123,14 @@ def main():
 if __name__ == "__main__":
     main()
 
-    # Test: join two tables from different pages on their normalised keys
+    # Test: join two tables from different pages on normalised keys (computed on the fly)
     population = load_table("List_of_countries_and_dependencies_by_population__t0")
     gdp = load_table("List_of_countries_by_GDP_(nominal)__t0")
 
-    joined = population.merge(gdp, left_on="Location__norm", right_on="Country/Territory__norm")
+    population["join_key"] = population["Location"].map(normalize_key)
+    gdp["join_key"] = gdp["Country/Territory"].map(normalize_key)
+
+    joined = population.merge(gdp, on="join_key")
     print()
     print(f"Population rows: {len(population)}, GDP rows: {len(gdp)}, joined: {len(joined)}")
     print(joined[["Location", "Population", "IMF (2026)"]].head())
-
-    # Which GDP names found no match in the population table?
-    unmatched = gdp[~gdp["Country/Territory__norm"].isin(population["Location__norm"])]
-    print()
-    print(unmatched["Country/Territory"].tolist())
-    print()
-    pattern = "Hong Kong|Puerto Rico|Congo|Micronesia|Bermuda"
-    print(population[population["Location"].str.contains(pattern, na=False)]["Location"].tolist())
-    print()
-    print("Gaps in GDP table:", int(gdp[["IMF (2026)", "World Bank (2025)", "United Nations (2024)"]].isna().sum().sum()))
