@@ -1,0 +1,35 @@
+[
+  {
+    "column": "Regional groupings",
+    "description": "The regional grouping or classification that the country belongs to",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What regional grouping does a country belong to?"
+  },
+  {
+    "column": "IMF (2026)",
+    "description": "The numeric value reported by the IMF for the year 2026 for a country",
+    "is_numeric": true,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the IMF value for a country for the year 2026?"
+  },
+  {
+    "column": "World Bank (2024)",
+    "description": "The numeric value reported by the World Bank for the year 2024 for a country",
+    "is_numeric": true,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the World Bank value for a country for the year 2024?"
+  }
+]

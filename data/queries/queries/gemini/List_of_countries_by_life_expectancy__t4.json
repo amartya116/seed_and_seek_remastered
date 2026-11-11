@@ -1,0 +1,170 @@
+[
+  {
+    "column": "Countries",
+    "description": "The name of the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "Which country is represented by this record?"
+  },
+  {
+    "column": "Life expectancy at birth - All",
+    "description": "The overall average life expectancy at birth for both sexes combined in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy at birth for {Countries}?"
+  },
+  {
+    "column": "Life expectancy at birth - M",
+    "description": "The average life expectancy at birth for males in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at birth - F",
+    "description": "The average life expectancy at birth for females in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at birth - FΔM",
+    "description": "The difference between female and male life expectancy at birth in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the difference between female and male life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at birth - Δ 2000",
+    "description": "The change in overall life expectancy at birth for the country compared to the year 2000",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much has life expectancy at birth changed since 2000 in {Countries}?"
+  },
+  {
+    "column": "HALE at birth - All",
+    "description": "The overall healthy life expectancy (HALE) at birth for both sexes combined in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall healthy life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "HALE at birth - M",
+    "description": "The healthy life expectancy (HALE) at birth for males in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male healthy life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "HALE at birth - F",
+    "description": "The healthy life expectancy (HALE) at birth for females in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female healthy life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "HALE at birth - FΔM",
+    "description": "The difference between female and male healthy life expectancy (HALE) at birth in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the gender gap in healthy life expectancy at birth in {Countries}?"
+  },
+  {
+    "column": "HALE at birth - Δ 2000",
+    "description": "The change in overall healthy life expectancy (HALE) at birth for the country compared to the year 2000",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "By how much has healthy life expectancy at birth changed since 2000 in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at age 60 - All",
+    "description": "The average additional years of life expectancy at age 60 for both sexes combined in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at age 60 - M",
+    "description": "The average additional years of life expectancy at age 60 for males in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at age 60 - F",
+    "description": "The average additional years of life expectancy at age 60 for females in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at age 60 - FΔM",
+    "description": "The difference between female and male life expectancy at age 60 in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the difference between female and male life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "Life expectancy at age 60 - Δ 2000",
+    "description": "The change in life expectancy at age 60 for the country compared to the year 2000",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much has life expectancy at age 60 changed since 2000 in {Countries}?"
+  },
+  {
+    "column": "HALE at age 60 - All",
+    "description": "The overall healthy life expectancy (HALE) at age 60 for both sexes combined in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall healthy life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "HALE at age 60 - M",
+    "description": "The healthy life expectancy (HALE) at age 60 for males in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male healthy life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "HALE at age 60 - F",
+    "description": "The healthy life expectancy (HALE) at age 60 for females in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female healthy life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "HALE at age 60 - FΔM",
+    "description": "The difference between female and male healthy life expectancy (HALE) at age 60 in the country",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the gender gap in healthy life expectancy at age 60 in {Countries}?"
+  },
+  {
+    "column": "HALE at age 60 - Δ 2000",
+    "description": "The change in healthy life expectancy (HALE) at age 60 for the country compared to the year 2000",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much has healthy life expectancy at age 60 changed since 2000 in {Countries}?"
+  }
+]

@@ -96,14 +96,43 @@ Embeds each query and scores it against **every** table card, so there are no ga
 matrix with rows `q1…qN` and columns `T1…TM`; each entry is cosine similarity × 100 (higher is
 better). Written to `output/score_matrix.json` and `output/score_matrix.csv`.
 
+To compare a seed's Groq queries directly against the Groq query files for all source tables:
+
+```
+python match_groq_queries.py
+```
+
+By default, this reads `output/column_queries_groq.json` and every `*.json` file in
+`data/queries/queries/groq/`. Each source file is assigned a `T1`, `T2`, ... column in
+case-insensitive filename order; each input query becomes a `q1`, `q2`, ... row. Both sets of
+query texts are embedded into the dedicated `data/chroma_groq_queries` ChromaDB collection.
+Each matrix cell selects the nearest individual source query from that file. The JSON includes
+cosine distances (lower is closer), similarity scores (`1 - distance`, scaled by 100), and the
+matched source column/query. CSV outputs are written to
+`output/groq_query_score_matrix.csv` and `output/groq_query_distance_matrix.csv`; the readable
+similarity matrix is also written to `output/groq_query_score_matrix.txt`. This flow is separate
+from `retrieve_chroma.py`, which compares against table cards indexed from DuckDB.
+
 ### 4. Sample the tables that satisfy the queries
 
 ```
 python select_tables.py --matrix output/score_matrix.json --threshold 50 --top 10
 ```
 
-A table **fulfils** a query when its score is at least `--threshold`. The script lists table
-combinations where:
+For the Groq-to-Groq matrix, use:
+
+```
+python select_tables.py --matrix output/groq_query_score_matrix.json --threshold 60 \
+  --output output/ranked_groq_table_matrices.json
+```
+
+A table **fulfils** a query when its score is at least `--threshold`. The selector reads either
+the normalized `scores` from `retrieve_chroma.py` or the 0-100 `similarities` from
+`match_groq_queries.py`. It considers every threshold-qualified table by default, enumerates all
+minimal covers, and ranks them with a max-priority heap by the average of each query's best score.
+No redundant supersets are included. By default, every minimal cover is written; use `--top N`
+to limit the output. If any query has no table at the threshold, selection fails rather than
+silently covering it below threshold. Table combinations must meet these conditions:
 
 - **every query is fulfilled** (completeness is never traded away),
 - **no table is redundant** (drop any one and a query is left unfulfilled),
@@ -111,10 +140,8 @@ combinations where:
 
 Each combination is returned as its own queries × tables sub-matrix and the list is **sorted by
 average score**: each query counts its best score within the combination, and those best scores
-are averaged. A query that no table reaches the threshold for is covered by its best table and
-reported under `weak_queries`. If the search is cut short (`--max-tables` too small, or the size
-limit is hit) it falls back to a greedy cover, so the result is never incomplete or empty.
-Output: `output/ranked_table_matrices.json`.
+are averaged. If the exact search exceeds its state limit, it raises an error instead of
+returning a partial or greedy result. Output: `output/ranked_table_matrices.json`.
 
 ### 5. Augment from DuckDB (planned)
 
@@ -147,5 +174,5 @@ data/            seed CSVs, plus (generated) raw/tables/clean/imputed, the DuckD
 output/          generated JSON/CSV (git-ignored)
 preprocessing/   scrape.py, clean.py, quality.py, dbms_store.py
 profiler.py  query.py  querygroq.py  equationextractorforembedding.py   seed -> queries
-retrieve_chroma.py  select_tables.py                                    queries -> scores -> tables
+retrieve_chroma.py  match_groq_queries.py  select_tables.py             queries -> scores -> tables
 ```

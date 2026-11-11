@@ -1,0 +1,234 @@
+[
+  {
+    "column": "Locations",
+    "description": "The name of the location the row refers to",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "Which location does the row describe?"
+  },
+  {
+    "column": "Life expectancy overall - at birth",
+    "description": "Overall life expectancy at birth for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall life expectancy at birth for the location?"
+  },
+  {
+    "column": "Life expectancy overall - bonus 0→15",
+    "description": "Contribution to overall life expectancy from ages 0 to 15 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the life expectancy contribution from ages 0 to 15 for the location?"
+  },
+  {
+    "column": "Life expectancy overall - at 15",
+    "description": "Overall life expectancy at age 15 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall life expectancy at age 15 for the location?"
+  },
+  {
+    "column": "Life expectancy overall - bonus 15→65",
+    "description": "Contribution to overall life expectancy from ages 15 to 65 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the life expectancy contribution from ages 15 to 65 for the location?"
+  },
+  {
+    "column": "Life expectancy overall - at 65",
+    "description": "Overall life expectancy at age 65 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall life expectancy at age 65 for the location?"
+  },
+  {
+    "column": "Life expectancy overall - bonus 65→80",
+    "description": "Contribution to overall life expectancy from ages 65 to 80 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the life expectancy contribution from ages 65 to 80 for the location?"
+  },
+  {
+    "column": "Life expectancy overall - at 80",
+    "description": "Overall life expectancy at age 80 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall life expectancy at age 80 for the location?"
+  },
+  {
+    "column": "Male - at birth",
+    "description": "Life expectancy at birth for males in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at birth",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male life expectancy at birth for the location?"
+  },
+  {
+    "column": "Male - at 15",
+    "description": "Life expectancy at age 15 for males in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at 15",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male life expectancy at age 15 for the location?"
+  },
+  {
+    "column": "Male - at 65",
+    "description": "Life expectancy at age 65 for males in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at 65",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male life expectancy at age 65 for the location?"
+  },
+  {
+    "column": "Male - at 80",
+    "description": "Life expectancy at age 80 for males in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at 80",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male life expectancy at age 80 for the location?"
+  },
+  {
+    "column": "Female - at birth",
+    "description": "Life expectancy at birth for females in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at birth",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female life expectancy at birth for the location?"
+  },
+  {
+    "column": "Female - at 15",
+    "description": "Life expectancy at age 15 for females in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at 15",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female life expectancy at age 15 for the location?"
+  },
+  {
+    "column": "Female - at 65",
+    "description": "Life expectancy at age 65 for females in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at 65",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female life expectancy at age 65 for the location?"
+  },
+  {
+    "column": "Female - at 80",
+    "description": "Life expectancy at age 80 for females in the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": "Life expectancy overall - at 80",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female life expectancy at age 80 for the location?"
+  },
+  {
+    "column": "Sex gap - at birth",
+    "description": "Difference in life expectancy between females and males at birth for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Male - at birth",
+      "Female - at birth"
+    ],
+    "derivation_formula": "([Female - at birth] - [Male - at birth])",
+    "query": "What is the sex gap in life expectancy at birth for the location?"
+  },
+  {
+    "column": "Sex gap - at 15",
+    "description": "Difference in life expectancy between females and males at age 15 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Male - at 15",
+      "Female - at 15"
+    ],
+    "derivation_formula": "([Female - at 15] - [Male - at 15])",
+    "query": "What is the sex gap in life expectancy at age 15 for the location?"
+  },
+  {
+    "column": "Sex gap - at 65",
+    "description": "Difference in life expectancy between females and males at age 65 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Male - at 65",
+      "Female - at 65"
+    ],
+    "derivation_formula": "([Female - at 65] - [Male - at 65])",
+    "query": "What is the sex gap in life expectancy at age 65 for the location?"
+  },
+  {
+    "column": "Sex gap - at 80",
+    "description": "Difference in life expectancy between females and males at age 80 for the location",
+    "is_numeric": true,
+    "belongs_to": "Locations",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Male - at 80",
+      "Female - at 80"
+    ],
+    "derivation_formula": "([Female - at 80] - [Male - at 80])",
+    "query": "What is the sex gap in life expectancy at age 80 for the location?"
+  }
+]

@@ -8,3 +8,4 @@ seed_signature.json
 preprocessing/data/
 data/seedandseek.duckdb
 data/chroma_seed_seek/
+data/chroma_groq_queries/

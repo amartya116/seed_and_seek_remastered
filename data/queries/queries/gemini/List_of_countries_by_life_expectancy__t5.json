@@ -1,0 +1,42 @@
+[
+  {
+    "column": "Country",
+    "description": "The name of the country or territory",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "Which country is represented by this record?"
+  },
+  {
+    "column": "All",
+    "description": "Overall average life expectancy at birth in years for the entire population",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall average life expectancy for the country?"
+  },
+  {
+    "column": "M",
+    "description": "Average life expectancy at birth in years for males",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy in this country?"
+  },
+  {
+    "column": "F",
+    "description": "Average life expectancy at birth in years for females",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy in this country?"
+  },
+  {
+    "column": "Sex gap",
+    "description": "The difference between female and male life expectancy in years",
+    "owner": "country",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the gap between female and male life expectancy in this country?"
+  }
+]

@@ -1,0 +1,63 @@
+[
+  {
+    "column": "Country / dependency",
+    "description": "The name of the country or dependency.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the name of the country or dependency?"
+  },
+  {
+    "column": "Total in km2 (mi2)",
+    "description": "The total area of the country or dependency, including land and inland water, measured in square kilometers (mi²).",
+    "is_numeric": true,
+    "belongs_to": "Country / dependency",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Land in km2 (mi2)",
+      "Inland water in km2 (mi2)"
+    ],
+    "derivation_formula": "[Land in km2 (mi2)] + [Inland water in km2 (mi2)]",
+    "query": "What is the total area (in km²) of a country or dependency?"
+  },
+  {
+    "column": "Land in km2 (mi2)",
+    "description": "The land area of the country or dependency, measured in square kilometers (mi²).",
+    "is_numeric": true,
+    "belongs_to": "Country / dependency",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the land area (in km²) of a country or dependency?"
+  },
+  {
+    "column": "Inland water in km2 (mi2)",
+    "description": "The inland water area of the country or dependency, measured in square kilometers (mi²).",
+    "is_numeric": true,
+    "belongs_to": "Country / dependency",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the inland water area (in km²) of a country or dependency?"
+  },
+  {
+    "column": "% water",
+    "description": "The percentage of the country or dependency's total area that is inland water.",
+    "is_numeric": true,
+    "belongs_to": "Country / dependency",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Total in km2 (mi2)",
+      "Inland water in km2 (mi2)"
+    ],
+    "derivation_formula": "([Inland water in km2 (mi2)] / [Total in km2 (mi2)]) * 100",
+    "query": "What percentage of a country or dependency's total area is inland water?"
+  }
+]
