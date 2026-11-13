@@ -143,6 +143,21 @@ average score**: each query counts its best score within the combination, and th
 are averaged. If the exact search exceeds its state limit, it raises an error instead of
 returning a partial or greedy result. Output: `output/ranked_table_matrices.json`.
 
+### 4b. Check which heap node satisfies the seed equation
+
+```
+python check_equation_nodes.py [--threshold 60] [--stop-at-first]
+```
+
+Walks the ranked heap (`output/ranked_groq_table_matrices.json`). For each node (a table set) the tables
+are joined on their entity key and the node's combined equation is tested against the seed equation
+(`output/column_relationship_equations.json`). A node satisfies it when every seed column is bound to a
+source column (score >= threshold) so that `belongs_to` holds in the source table's own equation,
+`subset_of(a, b)` holds between the bound columns in one table, distinct seed columns use distinct source
+columns, and every `is_derived` seed column can be computed from its bound parents. This is equation-level
+(no row data): it gives the same answer for inner/left/right/outer joins, and the join type only decides
+which bound columns can be NULL (reported per node). Output: `output/equation_node_check.json`.
+
 ### 5. Augment from DuckDB (planned)
 
 Take the top-ranked combination, read the matched tables from DuckDB by `table_id`, join them to
