@@ -1,11 +1,11 @@
 # Session Handoff
 
-- **Generated:** 2026-10-31T06:21:11.288Z
-- **Session ID:** 6a2be1f8-5125-496a-9237-e0bd2dc19c5e
+- **Generated:** 2026-11-19T17:44:38.931Z
+- **Session ID:** 3cd4bff6-0cf2-47f7-a538-e0dcef8b720c
 - **End reason:** other
 - **Working directory:** c:\projects\seed_and_seek_remastered
-- **Git branch:** chromadb-embeddings
-- **Last commit:** c2cbe60 Add files via upload
+- **Git branch:** chroma-index
+- **Last commit:** 47a4fc2 Add heap node equation checker
 - **Prompts this session:** 0
 
 ## Session goal
@@ -37,14 +37,28 @@ _No file edits detected_
 ## Working tree at session end
 
 ```
-M retrieve_chroma.py
-?? .claude/
-?? select_tables.py
+M .claude/handoff-nudge-state.json
+ M .claude/handoffs/LATEST.md
+ M README.md
+ M check_equation_nodes.py
+ M match_groq_queries.py
+ M select_tables.py
+?? .claude/handoffs/HANDOFF_2026-11-13T07-47-59-992Z.md
+?? .claude/handoffs/HANDOFF_2026-11-16T01-49-54-243Z.md
+?? .claude/handoffs/HANDOFF_2026-11-16T11-21-11-846Z.md
+?? .claude/handoffs/HANDOFF_2026-11-17T01-31-29-198Z.md
+?? .claude/handoffs/HANDOFF_2026-11-18T00-56-07-976Z.md
+?? table_equations.py
 ```
 
 ```
-retrieve_chroma.py | 84 +++++++++++++++++++++++++++++-------------------------
- 1 file changed, 45 insertions(+), 39 deletions(-)
+.claude/handoff-nudge-state.json |   4 +
+ .claude/handoffs/LATEST.md       |  31 ++--
+ README.md                        | 100 ++++++++----
+ check_equation_nodes.py          | 317 ++++++++++-----------------------------
+ match_groq_queries.py            |  49 +++++-
+ select_tables.py                 | 135 +++++++++++++++--
+ 6 files changed, 340 insertions(+), 296 deletions(-)
 ```
 
 ## How to use this doc

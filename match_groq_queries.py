@@ -1,7 +1,15 @@
 """Match seed-column queries against the queries generated for every Groq source table.
 
 Each source JSON file becomes one T-column. For every input query, a matrix cell is
-the nearest (lowest cosine distance) source query from that file.
+the nearest (lowest cosine distance) source column from that file. The score of every source
+column is kept as well (`column_scores`), so later steps can bind seed columns one-to-one.
+
+What is embedded (default --embed full): "<column name>. <description>. <query>". The column name and
+description carry what the column is; the query alone shares a template ("... for this country?")
+with every other query. Use --embed query for the old behaviour.
+
+Only non-derived seed columns are searched for (derived ones are computed from their inputs);
+every source column is a candidate, derived or not.
 
     python match_groq_queries.py
 """
@@ -20,7 +28,19 @@ from sentence_transformers import SentenceTransformer
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
-def load_query_records(path: Path, table_label: Optional[str] = None) -> list[dict]:
+def embed_text(column: str, description: Optional[str], query: str, mode: str) -> str:
+    """Text that is embedded for one column query."""
+    if mode == "query":
+        return query
+    parts = [column.strip()]
+    if isinstance(description, str) and description.strip():
+        parts.append(description.strip().rstrip("."))
+    parts.append(query)
+    return ". ".join(parts)
+
+
+def load_query_records(path: Path, table_label: Optional[str] = None, skip_derived: bool = False,
+                       embed: str = "full") -> list[dict]:
     """Load column query records from one query JSON file."""
     data = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(data, list):
@@ -37,12 +57,15 @@ def load_query_records(path: Path, table_label: Optional[str] = None) -> list[di
             texts = [texts]
         if not isinstance(column, str) or not isinstance(texts, list):
             raise ValueError(f"Column item {record_index} in {path} is missing column or query/queries")
+        if skip_derived and item.get("is_derived"):
+            continue
 
         for query_index, text in enumerate(texts):
             if isinstance(text, str) and text.strip():
                 queries.append({
                     "column": column,
                     "query": text.strip(),
+                    "text": embed_text(column, item.get("description"), text.strip(), embed),
                     "record_index": record_index,
                     "query_index": query_index,
                     "table_label": table_label or "",
@@ -70,8 +93,10 @@ def create_collection(client, name: str):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--queries", default="output/column_queries_groq.json",
-                        help="Input seed-column query JSON")
+    parser.add_argument("--queries", default="output/column_queries_groq_non_derived.json",
+                        help="Input seed-column query JSON (derived columns are skipped)")
+    parser.add_argument("--embed", choices=("full", "query"), default="full",
+                        help="full: column name + description + query (default); query: query text only")
     parser.add_argument("--sources", default="data/queries/queries/groq",
                         help="Folder containing one Groq query JSON per source table")
     parser.add_argument("--chroma", default="data/chroma_groq_queries",
@@ -99,12 +124,12 @@ def main() -> None:
     if not source_files:
         raise FileNotFoundError(f"No JSON source query files found in {source_dir}")
 
-    input_queries = load_query_records(input_path)
+    input_queries = load_query_records(input_path, skip_derived=True, embed=args.embed)
     source_tables = []
     source_queries = []
     for index, source_file in enumerate(source_files, start=1):
         label = f"T{index}"
-        records = load_query_records(source_file, label)
+        records = load_query_records(source_file, label, embed=args.embed)
         source_tables.append({"id": label, "source_file": source_file.name})
         source_queries.extend(records)
 
@@ -115,7 +140,7 @@ def main() -> None:
         *({"kind": "input", **record} for record in input_queries),
     ]
     vectors = model.encode(
-        [record["query"] for record in all_records],
+        [record["text"] for record in all_records],
         normalize_embeddings=True,
         show_progress_bar=True,
     ).tolist()
@@ -126,7 +151,7 @@ def main() -> None:
     collection = create_collection(client, args.collection)
     collection.add(
         ids=[f"query_{index:06d}" for index in range(len(all_records))],
-        documents=[record["query"] for record in all_records],
+        documents=[record["text"] for record in all_records],
         embeddings=vectors,
         metadatas=[
             {
@@ -148,6 +173,7 @@ def main() -> None:
     distances = []
     similarities = []
     best_matches = []
+    column_scores = []
     for query_index, input_query in enumerate(input_queries):
         result = collection.query(
             query_embeddings=[vectors[source_count + query_index]],
@@ -157,10 +183,14 @@ def main() -> None:
         )
 
         best_by_table = {}
+        by_column = {}
         for distance, metadata, document in zip(
             result["distances"][0], result["metadatas"][0], result["documents"][0]
         ):
             table_label = metadata["table_label"]
+            similarity = (1.0 - float(distance)) * 100.0
+            cols = by_column.setdefault(table_label, {})
+            cols[metadata["column"]] = max(cols.get(metadata["column"], -100.0), round(similarity, 4))
             if table_label not in best_by_table or distance < best_by_table[table_label]["distance"]:
                 best_by_table[table_label] = {
                     "distance": float(distance),
@@ -186,11 +216,13 @@ def main() -> None:
         distances.append(row_distances)
         similarities.append(row_similarities)
         best_matches.append(row_matches)
+        column_scores.append({table["id"]: by_column[table["id"]] for table in source_tables})
 
     output = {
         "embedding_model": EMBEDDING_MODEL,
         "metric": "cosine distance (lower is closer); similarity = (1 - distance) * 100",
         "cell_rule": "Each cell uses the nearest individual source query in that T file.",
+        "embed": args.embed,
         "query_source": str(input_path),
         "queries": [
             {"id": f"q{index}", "seed_column": query["column"], "query": query["query"]}
@@ -200,6 +232,7 @@ def main() -> None:
         "similarities": similarities,
         "distances": distances,
         "best_matches": best_matches,
+        "column_scores": column_scores,
     }
 
     output_path = Path(args.output)
