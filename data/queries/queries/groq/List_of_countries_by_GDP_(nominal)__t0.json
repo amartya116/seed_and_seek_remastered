@@ -1,0 +1,46 @@
+[
+  {
+    "column": "Country/Territory",
+    "description": "The name of the country or territory.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "Which country or territory is being described?"
+  },
+  {
+    "column": "IMF (2026)",
+    "description": "The IMF reported value for the year 2026 for the country.",
+    "is_numeric": true,
+    "belongs_to": "Country/Territory",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the IMF value for 2026 for a given country?"
+  },
+  {
+    "column": "World Bank (2025)",
+    "description": "The World Bank reported value for the year 2025 for the country.",
+    "is_numeric": true,
+    "belongs_to": "Country/Territory",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the World Bank value for 2025 for a given country?"
+  },
+  {
+    "column": "United Nations (2024)",
+    "description": "The United Nations reported value for the year 2024 for the country.",
+    "is_numeric": true,
+    "belongs_to": "Country/Territory",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the United Nations value for 2024 for a given country?"
+  }
+]

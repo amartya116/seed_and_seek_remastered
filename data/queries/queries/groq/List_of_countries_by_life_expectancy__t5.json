@@ -1,0 +1,60 @@
+[
+  {
+    "column": "Country",
+    "description": "The name of the country the row refers to.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the name of the country?"
+  },
+  {
+    "column": "All",
+    "description": "The overall numeric value for the country.",
+    "is_numeric": true,
+    "belongs_to": "Country",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall value for a country?"
+  },
+  {
+    "column": "M",
+    "description": "The numeric value for males in the country.",
+    "is_numeric": true,
+    "belongs_to": "Country",
+    "subset_of": "All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male value for a country?"
+  },
+  {
+    "column": "F",
+    "description": "The numeric value for females in the country.",
+    "is_numeric": true,
+    "belongs_to": "Country",
+    "subset_of": "All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female value for a country?"
+  },
+  {
+    "column": "Sex gap",
+    "description": "The difference between the female and male values for the country.",
+    "is_numeric": true,
+    "belongs_to": "Country",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "M",
+      "F"
+    ],
+    "derivation_formula": "([F] - [M])",
+    "query": "What is the sex gap for a country?"
+  }
+]

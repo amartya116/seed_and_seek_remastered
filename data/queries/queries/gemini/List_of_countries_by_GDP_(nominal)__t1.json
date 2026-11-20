@@ -1,0 +1,26 @@
+[
+  {
+    "column": "Regional groupings",
+    "description": "The name or classification of the geographic, economic, or multilateral regional grouping",
+    "owner": "Regional grouping",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the name of this regional grouping?"
+  },
+  {
+    "column": "IMF (2026)",
+    "description": "The economic projection or estimate for the regional grouping for the year 2026 as published by the International Monetary Fund",
+    "owner": "Regional grouping",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the IMF (2026) economic metric for this regional grouping?"
+  },
+  {
+    "column": "World Bank (2024)",
+    "description": "The economic indicator value for the regional grouping for the year 2024 as published by the World Bank",
+    "owner": "Regional grouping",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the World Bank (2024) economic estimate for this regional grouping?"
+  }
+]

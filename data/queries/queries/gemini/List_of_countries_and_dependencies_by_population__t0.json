@@ -1,0 +1,50 @@
+[
+  {
+    "column": "Location",
+    "description": "The name of the country, territory, or geographical entity",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the name of this location?"
+  },
+  {
+    "column": "Population",
+    "description": "The total estimated or recorded number of residents living in the location",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the population of location 'China'?"
+  },
+  {
+    "column": "% of world",
+    "description": "The share of the total world population represented by this location, expressed as a percentage",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What percentage of the world population does location 'India' account for?"
+  },
+  {
+    "column": "Date",
+    "description": "The effective date or reference period for the population figure",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the reference date for the population count of location 'United States'?"
+  },
+  {
+    "column": "Source (official or from the United Nations)",
+    "description": "The methodology or reporting agency providing the population figure, such as an official estimate, projection, or UN projection",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the source of the population estimate for location 'Brazil'?"
+  },
+  {
+    "column": "Notes",
+    "description": "Additional remarks or qualifications concerning the population data of the location",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "Are there any notes recorded for location 'Burundi'?"
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "column": "Countries and territories",
+    "description": "Name of the country or territory",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "Which country or territory is represented by this record?"
+  },
+  {
+    "column": "2024 - All",
+    "description": "Overall life expectancy at birth in years for the total population in 2024",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy for all individuals in this country and territory in 2024?"
+  },
+  {
+    "column": "2024 - Male",
+    "description": "Life expectancy at birth in years for males in 2024",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy in this country and territory for 2024?"
+  },
+  {
+    "column": "2024 - Female",
+    "description": "Life expectancy at birth in years for females in 2024",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy in this country and territory for 2024?"
+  },
+  {
+    "column": "2024 - Sex gap",
+    "description": "Difference in years between female and male life expectancy in 2024",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the life expectancy sex gap between females and males in this country and territory in 2024?"
+  },
+  {
+    "column": "Historical data - 2014",
+    "description": "Overall life expectancy at birth in years for 2014",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What was the life expectancy in this country and territory in 2014?"
+  },
+  {
+    "column": "Historical data - 2014 →2019",
+    "description": "Change in life expectancy in years from 2014 to 2019",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "By how many years did life expectancy change from 2014 to 2019 in this country and territory?"
+  },
+  {
+    "column": "Historical data - 2019",
+    "description": "Overall life expectancy at birth in years for 2019",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What was the life expectancy in this country and territory in 2019?"
+  },
+  {
+    "column": "Historical data - 2019 →2020",
+    "description": "Annual change in life expectancy in years from 2019 to 2020",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much did life expectancy change between 2019 and 2020 in this country and territory?"
+  },
+  {
+    "column": "Historical data - 2020",
+    "description": "Overall life expectancy at birth in years for 2020",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What was the life expectancy in this country and territory in 2020?"
+  },
+  {
+    "column": "Historical data - 2020 →2021",
+    "description": "Annual change in life expectancy in years from 2020 to 2021",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much did life expectancy change between 2020 and 2021 in this country and territory?"
+  },
+  {
+    "column": "Historical data - 2021",
+    "description": "Overall life expectancy at birth in years for 2021",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What was the life expectancy in this country and territory in 2021?"
+  },
+  {
+    "column": "Historical data - 2021 →2022",
+    "description": "Annual change in life expectancy in years from 2021 to 2022",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much did life expectancy change between 2021 and 2022 in this country and territory?"
+  },
+  {
+    "column": "Historical data - 2022",
+    "description": "Overall life expectancy at birth in years for 2022",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What was the life expectancy in this country and territory in 2022?"
+  },
+  {
+    "column": "Historical data - 2022 →2023",
+    "description": "Annual change in life expectancy in years from 2022 to 2023",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much did life expectancy change between 2022 and 2023 in this country and territory?"
+  },
+  {
+    "column": "Historical data - 2023",
+    "description": "Overall life expectancy at birth in years for 2023",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What was the life expectancy in this country and territory in 2023?"
+  },
+  {
+    "column": "Historical data - 2023 →2024",
+    "description": "Annual change in life expectancy in years from 2023 to 2024",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "How much did life expectancy change between 2023 and 2024 in this country and territory?"
+  },
+  {
+    "column": "recovery from COVID-19: 2019→2024",
+    "description": "Net change in life expectancy in years from pre-pandemic 2019 to 2024",
+    "owner": "country_and_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the net change in life expectancy from 2019 to 2024 indicating COVID-19 recovery for this country and territory?"
+  }
+]

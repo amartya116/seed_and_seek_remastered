@@ -1,0 +1,245 @@
+[
+  {
+    "column": "Countries",
+    "description": "The name of the country.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "Which country is described in this row?"
+  },
+  {
+    "column": "Life expectancy at birth - All",
+    "description": "Average total life expectancy at birth for the whole population of a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall life expectancy at birth for a country?"
+  },
+  {
+    "column": "Life expectancy at birth - M",
+    "description": "Average life expectancy at birth for males in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "Life expectancy at birth - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male life expectancy at birth for a country?"
+  },
+  {
+    "column": "Life expectancy at birth - F",
+    "description": "Average life expectancy at birth for females in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "Life expectancy at birth - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female life expectancy at birth for a country?"
+  },
+  {
+    "column": "Life expectancy at birth - FΔM",
+    "description": "Difference between female and male life expectancy at birth (female minus male) for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Life expectancy at birth - M",
+      "Life expectancy at birth - F"
+    ],
+    "derivation_formula": "([Life expectancy at birth - F] - [Life expectancy at birth - M])",
+    "query": "What is the difference between female and male life expectancy at birth for a country?"
+  },
+  {
+    "column": "Life expectancy at birth - Δ 2000",
+    "description": "Change in overall life expectancy at birth since the year 2000 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "How much has the overall life expectancy at birth changed since the year 2000 for a country?"
+  },
+  {
+    "column": "HALE at birth - All",
+    "description": "Average healthy life expectancy at birth for the whole population of a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall healthy life expectancy at birth for a country?"
+  },
+  {
+    "column": "HALE at birth - M",
+    "description": "Average healthy life expectancy at birth for males in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "HALE at birth - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male healthy life expectancy at birth for a country?"
+  },
+  {
+    "column": "HALE at birth - F",
+    "description": "Average healthy life expectancy at birth for females in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "HALE at birth - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female healthy life expectancy at birth for a country?"
+  },
+  {
+    "column": "HALE at birth - FΔM",
+    "description": "Difference between female and male healthy life expectancy at birth (female minus male) for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "HALE at birth - M",
+      "HALE at birth - F"
+    ],
+    "derivation_formula": "([HALE at birth - F] - [HALE at birth - M])",
+    "query": "What is the difference between female and male healthy life expectancy at birth for a country?"
+  },
+  {
+    "column": "HALE at birth - Δ 2000",
+    "description": "Change in overall healthy life expectancy at birth since the year 2000 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "How much has the overall healthy life expectancy at birth changed since the year 2000 for a country?"
+  },
+  {
+    "column": "Life expectancy at age 60 - All",
+    "description": "Average remaining life expectancy at age 60 for the whole population of a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "Life expectancy at age 60 - M",
+    "description": "Average remaining life expectancy at age 60 for males in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "Life expectancy at age 60 - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "Life expectancy at age 60 - F",
+    "description": "Average remaining life expectancy at age 60 for females in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "Life expectancy at age 60 - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "Life expectancy at age 60 - FΔM",
+    "description": "Difference between female and male life expectancy at age 60 (female minus male) for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Life expectancy at age 60 - M",
+      "Life expectancy at age 60 - F"
+    ],
+    "derivation_formula": "([Life expectancy at age 60 - F] - [Life expectancy at age 60 - M])",
+    "query": "What is the difference between female and male life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "Life expectancy at age 60 - Δ 2000",
+    "description": "Change in overall life expectancy at age 60 since the year 2000 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "How much has the overall life expectancy at age 60 changed since the year 2000 for a country?"
+  },
+  {
+    "column": "HALE at age 60 - All",
+    "description": "Average healthy remaining life expectancy at age 60 for the whole population of a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall healthy life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "HALE at age 60 - M",
+    "description": "Average healthy remaining life expectancy at age 60 for males in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "HALE at age 60 - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the male healthy life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "HALE at age 60 - F",
+    "description": "Average healthy remaining life expectancy at age 60 for females in a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": "HALE at age 60 - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the female healthy life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "HALE at age 60 - FΔM",
+    "description": "Difference between female and male healthy life expectancy at age 60 (female minus male) for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "HALE at age 60 - M",
+      "HALE at age 60 - F"
+    ],
+    "derivation_formula": "([HALE at age 60 - F] - [HALE at age 60 - M])",
+    "query": "What is the difference between female and male healthy life expectancy at age 60 for a country?"
+  },
+  {
+    "column": "HALE at age 60 - Δ 2000",
+    "description": "Change in overall healthy life expectancy at age 60 since the year 2000 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "How much has the overall healthy life expectancy at age 60 changed since the year 2000 for a country?"
+  }
+]

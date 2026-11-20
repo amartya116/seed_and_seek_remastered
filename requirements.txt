@@ -11,3 +11,10 @@ lxml>=4.9
 duckdb>=1.0
 tabpfn
 tabpfn-extensions[unsupervised]
+# Seed queries (querygroq.py, query.py, run_all_tables.py, run_all_gemini.py)
+groq
+pydantic>=2.0
+google-genai
+# ChromaDB index and retrieval (index_chroma.py, retrieve_chroma.py)
+chromadb
+sentence-transformers

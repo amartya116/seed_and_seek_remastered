@@ -1,0 +1,46 @@
+[
+  {
+    "column": "City/Town",
+    "description": "The name and administrative designation of the city or town, often a capital or administrative center",
+    "owner": "City/Town",
+    "not_owners": [
+      "Country/Territory",
+      "Continent"
+    ],
+    "relations": "City/Town belongs to Country/Territory, which is located in Continent",
+    "query": "Which City/Town is listed for a given country or territory?"
+  },
+  {
+    "column": "Country/Territory",
+    "description": "The name of the sovereign nation, dependency, or overseas territory",
+    "owner": "Country/Territory",
+    "not_owners": [
+      "City/Town",
+      "Continent"
+    ],
+    "relations": "Country/Territory contains City/Town and is situated within Continent",
+    "query": "Which Country/Territory does this city or town belong to?"
+  },
+  {
+    "column": "Continent",
+    "description": "The continent in which the country or territory is geographically situated",
+    "owner": "Continent",
+    "not_owners": [
+      "Country/Territory",
+      "City/Town"
+    ],
+    "relations": "Continent encompasses multiple countries and territories",
+    "query": "On which Continent is this country located?"
+  },
+  {
+    "column": "Notes",
+    "description": "Historical, demographic, or political notes specific to the city, town, or its capital status",
+    "owner": "City/Town",
+    "not_owners": [
+      "Country/Territory",
+      "Continent"
+    ],
+    "relations": "Notes provides additional context about the specific City/Town",
+    "query": "What are the Notes detailing the status or history of City/Town?"
+  }
+]

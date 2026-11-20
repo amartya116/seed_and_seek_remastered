@@ -1,0 +1,34 @@
+[
+  {
+    "column": "Country/Territory",
+    "description": "The name of the country, territory, or geographic aggregate entity.",
+    "owner": "country_or_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the name of this country or territory?"
+  },
+  {
+    "column": "IMF (2026)",
+    "description": "The economic projection (e.g., nominal GDP in millions of USD) for the country or territory estimated by the International Monetary Fund for the year 2026.",
+    "owner": "country_or_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the IMF (2026) economic metric for this country or territory?"
+  },
+  {
+    "column": "World Bank (2025)",
+    "description": "The economic figure (e.g., nominal GDP in millions of USD) for the country or territory reported or estimated by the World Bank for the year 2025.",
+    "owner": "country_or_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the World Bank (2025) estimate for this country or territory?"
+  },
+  {
+    "column": "United Nations (2024)",
+    "description": "The economic figure (e.g., nominal GDP in millions of USD) for the country or territory reported or estimated by the United Nations for the year 2024.",
+    "owner": "country_or_territory",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the United Nations (2024) figure for this country or territory?"
+  }
+]

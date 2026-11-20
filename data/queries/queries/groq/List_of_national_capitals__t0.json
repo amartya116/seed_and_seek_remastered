@@ -1,0 +1,46 @@
+[
+  {
+    "column": "City/Town",
+    "description": "The name of the city or town, possibly including additional descriptive information in parentheses.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the name of the city or town?"
+  },
+  {
+    "column": "Country/Territory",
+    "description": "The name of the country or territory where the city or town is located.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "Which country or territory is associated with the city or town?"
+  },
+  {
+    "column": "Continent",
+    "description": "The continent on which the city or town (or its country) is situated.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "On which continent is the city or town located?"
+  },
+  {
+    "column": "Notes",
+    "description": "Additional textual notes or remarks about the city or town.",
+    "is_numeric": false,
+    "belongs_to": "City/Town",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What additional notes are provided for the city or town?"
+  }
+]

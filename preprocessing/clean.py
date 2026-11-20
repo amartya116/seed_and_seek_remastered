@@ -213,13 +213,8 @@ def clean_table(df, caption=None):
     key_columns = [k for k in key_columns if k in df.columns]
     number_columns = [n for n in number_columns if n in df.columns]
 
-    for key in key_columns:
-        df[f"{key}__norm"] = df[key].map(normalize_key)
-
     columns_info = []
     for col in df.columns:
-        if col.endswith("__norm"):
-            continue
         if col in key_columns:
             role = "key"
         elif col in number_columns:

@@ -1,0 +1,162 @@
+[
+  {
+    "column": "Locations",
+    "description": "The name of the country, territory, or geographical area",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the name of the location?"
+  },
+  {
+    "column": "Life expectancy overall - at birth",
+    "description": "Total life expectancy in years for the entire population at birth",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy at birth in this location?"
+  },
+  {
+    "column": "Life expectancy overall - bonus 0→15",
+    "description": "The increase in total expected age of death gained by surviving from birth to age 15",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy bonus from age 0 to 15 for this location?"
+  },
+  {
+    "column": "Life expectancy overall - at 15",
+    "description": "Remaining life expectancy in years for individuals reaching age 15",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy at age 15 in this location?"
+  },
+  {
+    "column": "Life expectancy overall - bonus 15→65",
+    "description": "The increase in total expected age of death gained by surviving from age 15 to age 65",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy bonus from age 15 to 65 for this location?"
+  },
+  {
+    "column": "Life expectancy overall - at 65",
+    "description": "Remaining life expectancy in years for individuals reaching age 65",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy at age 65 in this location?"
+  },
+  {
+    "column": "Life expectancy overall - bonus 65→80",
+    "description": "The increase in total expected age of death gained by surviving from age 65 to age 80",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy bonus from age 65 to 80 for this location?"
+  },
+  {
+    "column": "Life expectancy overall - at 80",
+    "description": "Remaining life expectancy in years for individuals reaching age 80",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the overall life expectancy at age 80 in this location?"
+  },
+  {
+    "column": "Male - at birth",
+    "description": "Male life expectancy in years at birth",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy at birth in this location?"
+  },
+  {
+    "column": "Male - at 15",
+    "description": "Remaining life expectancy in years for males reaching age 15",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy at age 15 in this location?"
+  },
+  {
+    "column": "Male - at 65",
+    "description": "Remaining life expectancy in years for males reaching age 65",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy at age 65 in this location?"
+  },
+  {
+    "column": "Male - at 80",
+    "description": "Remaining life expectancy in years for males reaching age 80",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the male life expectancy at age 80 in this location?"
+  },
+  {
+    "column": "Female - at birth",
+    "description": "Female life expectancy in years at birth",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy at birth in this location?"
+  },
+  {
+    "column": "Female - at 15",
+    "description": "Remaining life expectancy in years for females reaching age 15",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy at age 15 in this location?"
+  },
+  {
+    "column": "Female - at 65",
+    "description": "Remaining life expectancy in years for females reaching age 65",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy at age 65 in this location?"
+  },
+  {
+    "column": "Female - at 80",
+    "description": "Remaining life expectancy in years for females reaching age 80",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the female life expectancy at age 80 in this location?"
+  },
+  {
+    "column": "Sex gap - at birth",
+    "description": "Difference in years between female and male life expectancy at birth",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the sex gap in life expectancy at birth in this location?"
+  },
+  {
+    "column": "Sex gap - at 15",
+    "description": "Difference in years between female and male remaining life expectancy at age 15",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the sex gap in remaining life expectancy at age 15 in this location?"
+  },
+  {
+    "column": "Sex gap - at 65",
+    "description": "Difference in years between female and male remaining life expectancy at age 65",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the sex gap in remaining life expectancy at age 65 in this location?"
+  },
+  {
+    "column": "Sex gap - at 80",
+    "description": "Difference in years between female and male remaining life expectancy at age 80",
+    "owner": "location",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the sex gap in remaining life expectancy at age 80 in this location?"
+  }
+]

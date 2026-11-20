@@ -1,0 +1,68 @@
+[
+  {
+    "column": "Location",
+    "description": "The name of the location (e.g., country).",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the name of the location?"
+  },
+  {
+    "column": "Population",
+    "description": "The total number of people living in the location.",
+    "is_numeric": true,
+    "belongs_to": "Location",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the population of the location?"
+  },
+  {
+    "column": "% of world",
+    "description": "The proportion of the world's total population that lives in the location, expressed as a percentage.",
+    "is_numeric": true,
+    "belongs_to": "Location",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What percentage of the world population does the location represent?"
+  },
+  {
+    "column": "Date",
+    "description": "The date when the population figure was reported or estimated.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the date of the measurement for the location?"
+  },
+  {
+    "column": "Source (official or from the United Nations)",
+    "description": "The source that provided the population figure, such as an official estimate or UN projection.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the source of the data for the location?"
+  },
+  {
+    "column": "Notes",
+    "description": "Additional remarks or comments about the row, if any.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What notes are provided for the location?"
+  }
+]

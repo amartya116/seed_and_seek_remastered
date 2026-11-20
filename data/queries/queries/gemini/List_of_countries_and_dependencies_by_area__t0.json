@@ -1,0 +1,42 @@
+[
+  {
+    "column": "Country / dependency",
+    "description": "The name of the country, territory, dependency, or geographic entity",
+    "owner": "country_or_dependency",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the name of the country or dependency?"
+  },
+  {
+    "column": "Total in km2 (mi2)",
+    "description": "The total surface area of the country or dependency in square kilometers",
+    "owner": "country_or_dependency",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the total area in square kilometers of the country or dependency?"
+  },
+  {
+    "column": "Land in km2 (mi2)",
+    "description": "The land area portion of the country or dependency in square kilometers",
+    "owner": "country_or_dependency",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the total land area in square kilometers of the country or dependency?"
+  },
+  {
+    "column": "Inland water in km2 (mi2)",
+    "description": "The surface area of inland water bodies within the country or dependency in square kilometers",
+    "owner": "country_or_dependency",
+    "not_owners": [],
+    "relations": [],
+    "query": "What is the inland water area in square kilometers of the country or dependency?"
+  },
+  {
+    "column": "% water",
+    "description": "The percentage of the country or dependency's total area that consists of water",
+    "owner": "country_or_dependency",
+    "not_owners": [],
+    "relations": [],
+    "query": "What percentage of the country or dependency's area is covered by water?"
+  }
+]

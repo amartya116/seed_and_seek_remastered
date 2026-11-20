@@ -1,0 +1,224 @@
+[
+  {
+    "column": "Countries and territories",
+    "description": "The name of the country or territory.",
+    "is_numeric": false,
+    "belongs_to": null,
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the name of the country?"
+  },
+  {
+    "column": "2024 - All",
+    "description": "The overall measurement for the year 2024 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the overall measurement for 2024 for a country?"
+  },
+  {
+    "column": "2024 - Male",
+    "description": "The measurement for male individuals in the year 2024 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": "2024 - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the 2024 measurement for male individuals in a country?"
+  },
+  {
+    "column": "2024 - Female",
+    "description": "The measurement for female individuals in the year 2024 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": "2024 - All",
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What is the 2024 measurement for female individuals in a country?"
+  },
+  {
+    "column": "2024 - Sex gap",
+    "description": "The difference between the female and male measurements in 2024 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "2024 - Male",
+      "2024 - Female"
+    ],
+    "derivation_formula": "([2024 - Female] - [2024 - Male])",
+    "query": "What is the sex gap in the 2024 measurement for a country?"
+  },
+  {
+    "column": "Historical data - 2014",
+    "description": "The measurement for the year 2014 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What was the measurement in 2014 for a country?"
+  },
+  {
+    "column": "Historical data - 2014 →2019",
+    "description": "The change in the measurement from 2014 to 2019 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Historical data - 2014",
+      "Historical data - 2019"
+    ],
+    "derivation_formula": "([Historical data - 2019] - [Historical data - 2014])",
+    "query": "What was the change in the measurement from 2014 to 2019 for a country?"
+  },
+  {
+    "column": "Historical data - 2019",
+    "description": "The measurement for the year 2019 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What was the measurement in 2019 for a country?"
+  },
+  {
+    "column": "Historical data - 2019 →2020",
+    "description": "The change in the measurement from 2019 to 2020 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Historical data - 2019",
+      "Historical data - 2020"
+    ],
+    "derivation_formula": "([Historical data - 2020] - [Historical data - 2019])",
+    "query": "What was the change in the measurement from 2019 to 2020 for a country?"
+  },
+  {
+    "column": "Historical data - 2020",
+    "description": "The measurement for the year 2020 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What was the measurement in 2020 for a country?"
+  },
+  {
+    "column": "Historical data - 2020 →2021",
+    "description": "The change in the measurement from 2020 to 2021 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Historical data - 2020",
+      "Historical data - 2021"
+    ],
+    "derivation_formula": "([Historical data - 2021] - [Historical data - 2020])",
+    "query": "What was the change in the measurement from 2020 to 2021 for a country?"
+  },
+  {
+    "column": "Historical data - 2021",
+    "description": "The measurement for the year 2021 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What was the measurement in 2021 for a country?"
+  },
+  {
+    "column": "Historical data - 2021 →2022",
+    "description": "The change in the measurement from 2021 to 2022 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Historical data - 2021",
+      "Historical data - 2022"
+    ],
+    "derivation_formula": "([Historical data - 2022] - [Historical data - 2021])",
+    "query": "What was the change in the measurement from 2021 to 2022 for a country?"
+  },
+  {
+    "column": "Historical data - 2022",
+    "description": "The measurement for the year 2022 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What was the measurement in 2022 for a country?"
+  },
+  {
+    "column": "Historical data - 2022 →2023",
+    "description": "The change in the measurement from 2022 to 2023 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "Historical data - 2022",
+      "Historical data - 2023"
+    ],
+    "derivation_formula": "([Historical data - 2023] - [Historical data - 2022])",
+    "query": "What was the change in the measurement from 2022 to 2023 for a country?"
+  },
+  {
+    "column": "Historical data - 2023",
+    "description": "The measurement for the year 2023 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": false,
+    "derived_from": [],
+    "derivation_formula": null,
+    "query": "What was the measurement in 2023 for a country?"
+  },
+  {
+    "column": "Historical data - 2023 →2024",
+    "description": "The change in the measurement from 2023 to 2024 for a country.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "2024 - All",
+      "Historical data - 2023"
+    ],
+    "derivation_formula": "([2024 - All] - [Historical data - 2023])",
+    "query": "What was the change in the measurement from 2023 to 2024 for a country?"
+  },
+  {
+    "column": "recovery from COVID-19: 2019→ 2024",
+    "description": "The change in the measurement from 2019 to 2024 for a country, representing recovery from COVID-19.",
+    "is_numeric": true,
+    "belongs_to": "Countries and territories",
+    "subset_of": null,
+    "is_derived": true,
+    "derived_from": [
+      "2024 - All",
+      "Historical data - 2019"
+    ],
+    "derivation_formula": "([2024 - All] - [Historical data - 2019])",
+    "query": "What was the change in the measurement from 2019 to 2024 for a country, indicating recovery from COVID-19?"
+  }
+]
