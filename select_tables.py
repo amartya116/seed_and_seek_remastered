@@ -3,15 +3,17 @@
     python select_tables.py --matrix output/groq_query_score_matrix.json --threshold 60 \
         --output output/ranked_groq_table_matrices.json --heap-txt output/groq_table_set_max_heap.txt
 
-Scores are cosine similarity x 100. Two coverage modes (--mode auto picks equation when the matrix has
-per-column scores from match_groq_queries.py, else queries):
+Scores are cosine similarity x 100. Two coverage modes:
+
+  queries   (default) candidates: a table fulfils a query when its best score is >= threshold. Every
+            query must be fulfilled and no table may be redundant. The candidates are then joined and
+            checked on real rows by join_heap_nodes.py.
 
   equation  A table set is valid when every non-derived seed column is bound to its own source column
             (score >= threshold, one-to-one), each subset_of group of the seed (e.g. {All, M, F}) is bound
             inside ONE table with the same subset_of shape, every bound column belongs_to its table's key,
             and every table's key matches the seed entity. Relations come from --seed-queries and the
             source query JSONs in --queries-dir. Derived seed columns are computed from bound inputs.
-  queries   A table fulfils a query when its best score is >= threshold (no relations, no one-to-one).
 
 Only minimal sets are kept: dropping any table makes the set invalid. Results are ranked by the mean
 score per seed column, highest first, and also written as a max-heap tree (--heap-txt).
@@ -177,7 +179,7 @@ def run_equation_mode(args, data, tables, table_ids):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--matrix', default='output/score_matrix.json')
+    p.add_argument('--matrix', default='output/groq_query_score_matrix.json')
     p.add_argument('--threshold', type=float, default=50,
                    help='minimum score (0-100) for a table to fulfil a query')
     p.add_argument('--top', type=int, default=None,
@@ -186,9 +188,10 @@ def main():
                    help='optional cap on qualifying tables per query (default: consider all)')
     p.add_argument('--max-tables', type=int, default=None,
                    help='largest combination size (default: number of source tables)')
-    p.add_argument('--output', default='output/ranked_table_matrices.json')
-    p.add_argument('--heap-txt', default=None, help='also write the max-heap tree as text')
-    p.add_argument('--mode', choices=('auto', 'equation', 'queries'), default='auto')
+    p.add_argument('--output', default='output/ranked_groq_table_matrices.json')
+    p.add_argument('--heap-txt', default='output/groq_table_set_max_heap.txt', help='max-heap tree as text')
+    p.add_argument('--mode', choices=('queries', 'equation', 'auto'), default='queries',
+                   help='queries: score-based candidates (default); equation: only equation-valid sets')
     p.add_argument('--seed-queries', default='output/column_queries_groq.json',
                    help='seed column records with belongs_to / subset_of / is_derived (equation mode)')
     p.add_argument('--queries-dir', default='data/queries/queries/groq',

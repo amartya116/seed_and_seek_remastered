@@ -1,20 +1,10 @@
 pandas>=2.1
-numpy>=1.24
-# Optional input formats
-openpyxl>=3.0    # Excel
-pyarrow>=11.0    # Parquet
-# Development
-pytest>=7.0
-# Preprocessing (scrape, clean, quality, dbms_store)
-requests>=2.28
-lxml>=4.9
-duckdb>=1.0
-tabpfn
-tabpfn-extensions[unsupervised]
-# Seed queries (querygroq.py, query.py, run_all_tables.py, run_all_gemini.py)
+# Seed queries (querygroq.py, query.py)
 groq
 pydantic>=2.0
 google-genai
-# ChromaDB index and retrieval (index_chroma.py, retrieve_chroma.py)
+# Matching (match_groq_queries.py)
 chromadb
 sentence-transformers
+# Source tables in DuckDB (store_duckdb.py)
+duckdb

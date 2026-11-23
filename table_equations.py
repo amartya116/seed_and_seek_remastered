@@ -1,6 +1,6 @@
 """Equation structure of the seed and the source tables, and equation-aware coverage.
 
-Shared by select_tables.py (building the heap) and check_equation_nodes.py (explaining a node).
+Used by select_tables.py to decide which table sets satisfy the seed equation (the heap).
 
 Seed side: only non-derived seed columns are searched for. They are grouped by subset_of
 (e.g. {All, M, F}); a group must be found inside ONE source table with the same subset_of shape.

@@ -1,11 +1,11 @@
 # Session Handoff
 
-- **Generated:** 2026-11-19T17:44:38.931Z
-- **Session ID:** 3cd4bff6-0cf2-47f7-a538-e0dcef8b720c
+- **Generated:** 2026-11-23T13:22:47.758Z
+- **Session ID:** ca128124-9e25-4887-8222-4d1c26232d93
 - **End reason:** other
 - **Working directory:** c:\projects\seed_and_seek_remastered
 - **Git branch:** chroma-index
-- **Last commit:** 47a4fc2 Add heap node equation checker
+- **Last commit:** f4d68d3 Enhance query matching and table selection functionality
 - **Prompts this session:** 0
 
 ## Session goal
@@ -37,28 +37,16 @@ _No file edits detected_
 ## Working tree at session end
 
 ```
-M .claude/handoff-nudge-state.json
- M .claude/handoffs/LATEST.md
- M README.md
- M check_equation_nodes.py
- M match_groq_queries.py
- M select_tables.py
-?? .claude/handoffs/HANDOFF_2026-11-13T07-47-59-992Z.md
-?? .claude/handoffs/HANDOFF_2026-11-16T01-49-54-243Z.md
-?? .claude/handoffs/HANDOFF_2026-11-16T11-21-11-846Z.md
-?? .claude/handoffs/HANDOFF_2026-11-17T01-31-29-198Z.md
-?? .claude/handoffs/HANDOFF_2026-11-18T00-56-07-976Z.md
-?? table_equations.py
+M .claude/handoffs/LATEST.md
+?? .claude/handoffs/HANDOFF_2026-11-20T05-54-19-220Z.md
+?? .claude/handoffs/HANDOFF_2026-11-22T01-58-21-893Z.md
+?? .claude/handoffs/HANDOFF_2026-11-22T06-09-12-669Z.md
+?? .claude/handoffs/HANDOFF_2026-11-23T06-59-56-259Z.md
 ```
 
 ```
-.claude/handoff-nudge-state.json |   4 +
- .claude/handoffs/LATEST.md       |  31 ++--
- README.md                        | 100 ++++++++----
- check_equation_nodes.py          | 317 ++++++++++-----------------------------
- match_groq_queries.py            |  49 +++++-
- select_tables.py                 | 135 +++++++++++++++--
- 6 files changed, 340 insertions(+), 296 deletions(-)
+.claude/handoffs/LATEST.md | 31 +++++++++----------------------
+ 1 file changed, 9 insertions(+), 22 deletions(-)
 ```
 
 ## How to use this doc

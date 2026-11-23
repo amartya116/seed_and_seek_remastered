@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seed &amp; Seek</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --ink: #1c2330; --muted: #667085; --line: #dde2ea;
+    --accent: #2f5bd3; --accent-ink: #ffffff; --ok: #1f8a4c; --bad: #c4362b; --run: #b7791f;
+    --code-bg: #0f1623; --code-ink: #dbe4f3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #10141b; --panel: #171c25; --ink: #e6eaf2; --muted: #98a2b3; --line: #2a3140;
+      --accent: #6f93ff; --accent-ink: #0b1020; --ok: #4cc283; --bad: #ff7a6e; --run: #f0b450;
+      --code-bg: #0b0f16; --code-ink: #dbe4f3;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); margin: 0 0 24px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .drop { border: 2px dashed var(--line); border-radius: 10px; padding: 28px 16px; text-align: center;
+          cursor: pointer; transition: border-color .15s, background .15s; }
+  .drop:hover, .drop.over { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 6%, transparent); }
+  .drop strong { display: block; font-size: 16px; }
+  .drop span { color: var(--muted); font-size: 14px; }
+  .row { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; margin-top: 16px; }
+  label { font-size: 13px; color: var(--muted); display: block; margin-bottom: 4px; }
+  input[type=number] { width: 110px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px;
+                       background: var(--bg); color: var(--ink); font: inherit; }
+  button, .btn { appearance: none; border: 0; border-radius: 8px; padding: 10px 18px; font: inherit; font-weight: 600;
+                 background: var(--accent); color: var(--accent-ink); cursor: pointer; text-decoration: none; display: inline-block; }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .btn.secondary { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+  .grow { flex: 1; }
+  h2 { font-size: 15px; margin: 0 0 12px; }
+  ol.steps { list-style: none; margin: 0; padding: 0; }
+  ol.steps li { border-top: 1px solid var(--line); padding: 10px 0; }
+  ol.steps li:first-child { border-top: 0; }
+  .step-head { display: flex; align-items: center; gap: 10px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); flex: none; }
+  .running .dot { background: var(--run); animation: pulse 1s infinite ease-in-out; }
+  .done .dot { background: var(--ok); }
+  .failed .dot { background: var(--bad); }
+  .skipped { color: var(--muted); }
+  @keyframes pulse { 50% { opacity: .35; } }
+  .meta { margin-left: auto; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  details { margin: 6px 0 0 20px; }
+  summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  pre { margin: 8px 0 0; padding: 14px; border-radius: 8px; background: var(--code-bg); color: var(--code-ink);
+        font: 13px/1.5 ui-monospace, "Cascadia Code", Consolas, monospace; overflow-x: auto; white-space: pre; }
+  .error { color: var(--bad); margin: 0 0 12px; font-weight: 600; overflow-wrap: anywhere; }
+  .hidden { display: none; }
+  .result-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .result-head h2 { margin: 0; }
+  .result-head .btn { margin-left: auto; padding: 6px 12px; font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Seed &amp; Seek</h1>
+  <p class="sub">Upload a seed CSV. One click runs profiling, Groq queries, the seed equation, ChromaDB matching, the heap of table sets, and joins every heap node from DuckDB.</p>
+
+  <section class="panel">
+    <div id="drop" class="drop" tabindex="0" role="button" aria-label="Choose a CSV file">
+      <strong id="dropTitle">Drop a CSV here or click to choose</strong>
+      <span id="dropHint">Up to 20 MB</span>
+    </div>
+    <input id="file" type="file" accept=".csv,text/csv" hidden>
+    <div class="row">
+      <div>
+        <label for="threshold">Match threshold (0–100)</label>
+        <input id="threshold" type="number" min="0" max="100" step="1" value="60">
+      </div>
+      <div class="grow"></div>
+      <button id="run" disabled>Run pipeline</button>
+    </div>
+  </section>
+
+  <section id="progress" class="panel hidden">
+    <h2 id="progressTitle">Pipeline</h2>
+    <p id="error" class="error hidden"></p>
+    <ol id="steps" class="steps"></ol>
+  </section>
+
+  <section id="result" class="panel hidden">
+    <div class="result-head">
+      <h2>Heap of table sets</h2>
+      <a class="btn secondary" href="/api/heap.txt">Download heap.txt</a>
+    </div>
+    <pre id="heap"></pre>
+  </section>
+
+  <section id="joins" class="panel hidden">
+    <div class="result-head">
+      <h2>Join report per heap node</h2>
+      <a class="btn secondary" href="/api/join_report.txt">Download join_report.txt</a>
+    </div>
+    <p class="sub" style="margin:4px 0 0">Each node's tables joined on the entity key (inner / left / right / outer), read-only from DuckDB.
+      seed% = seed entities found · dup = duplicate keys · belongs_to = one value per entity · agree% = values equal to the seed's.</p>
+    <pre id="report"></pre>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let chosen = null;
+let timer = null;
+
+function choose(file) {
+  if (!file) return;
+  if (!file.name.toLowerCase().endsWith('.csv')) {
+    $('dropTitle').textContent = 'That is not a .csv file';
+    $('dropHint').textContent = file.name;
+    chosen = null; $('run').disabled = true; return;
+  }
+  chosen = file;
+  $('dropTitle').textContent = file.name;
+  $('dropHint').textContent = `${(file.size / 1024).toFixed(1)} KB · click to change`;
+  $('run').disabled = false;
+}
+
+$('drop').addEventListener('click', () => $('file').click());
+$('drop').addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('file').click(); } });
+$('file').addEventListener('change', (e) => choose(e.target.files[0]));
+['dragenter', 'dragover'].forEach((t) => $('drop').addEventListener(t, (e) => { e.preventDefault(); $('drop').classList.add('over'); }));
+['dragleave', 'drop'].forEach((t) => $('drop').addEventListener(t, (e) => { e.preventDefault(); $('drop').classList.remove('over'); }));
+$('drop').addEventListener('drop', (e) => choose(e.dataTransfer.files[0]));
+
+$('run').addEventListener('click', async () => {
+  if (!chosen) return;
+  $('run').disabled = true;
+  $('result').classList.add('hidden');
+  $('joins').classList.add('hidden');
+  const params = new URLSearchParams({ name: chosen.name, threshold: $('threshold').value });
+  try {
+    const res = await fetch(`/api/run?${params}`, { method: 'POST', body: chosen });
+    const body = await res.json();
+    if (!res.ok) { showError(body.error || `Request failed (${res.status})`); $('run').disabled = false; return; }
+    poll();
+  } catch (err) {
+    showError(`Could not reach the server: ${err.message}`); $('run').disabled = false;
+  }
+});
+
+function showError(msg) {
+  $('progress').classList.remove('hidden');
+  $('error').textContent = msg;
+  $('error').classList.remove('hidden');
+}
+
+function render(state) {
+  $('progress').classList.remove('hidden');
+  const label = { running: 'Running…', done: 'Finished', failed: 'Stopped', idle: 'Pipeline' }[state.status] || 'Pipeline';
+  $('progressTitle').textContent = state.file ? `${label} · ${state.file} · threshold ${state.threshold}` : label;
+  $('error').textContent = state.error || '';
+  $('error').classList.toggle('hidden', !state.error);
+  const list = $('steps');
+  const open = new Set([...list.querySelectorAll('details[open]')].map((d) => d.dataset.i));
+  list.replaceChildren(...state.steps.map((s, i) => {
+    const li = document.createElement('li');
+    li.className = s.status;
+    const head = document.createElement('div');
+    head.className = 'step-head';
+    const dot = document.createElement('span'); dot.className = 'dot';
+    const name = document.createElement('span'); name.textContent = s.name;
+    const meta = document.createElement('span'); meta.className = 'meta';
+    meta.textContent = s.seconds != null ? `${s.status} · ${s.seconds}s` : s.status;
+    head.append(dot, name, meta);
+    li.append(head);
+    if (s.log) {
+      const d = document.createElement('details'); d.dataset.i = i;
+      if (open.has(String(i)) || s.status === 'failed') d.open = true;
+      const sum = document.createElement('summary'); sum.textContent = 'Log';
+      const pre = document.createElement('pre'); pre.textContent = s.log;
+      d.append(sum, pre); li.append(d);
+    }
+    return li;
+  }));
+  if (state.heap) { $('heap').textContent = state.heap; $('result').classList.remove('hidden'); }
+  if (state.report) { $('report').textContent = state.report; $('joins').classList.remove('hidden'); }
+}
+
+async function poll() {
+  clearTimeout(timer);
+  try {
+    const state = await (await fetch('/api/status')).json();
+    render(state);
+    if (state.status === 'running') { timer = setTimeout(poll, 1000); return; }
+  } catch (err) {
+    showError(`Lost contact with the server: ${err.message}`);
+  }
+  $('run').disabled = !chosen;
+}
+
+// Show the last run (or a run still in progress) after a page reload.
+fetch('/api/status').then((r) => r.json()).then((s) => {
+  if (s.steps && s.steps.length) { render(s); if (s.status === 'running') { $('run').disabled = true; poll(); } }
+}).catch(() => {});
+</script>
+</body>
+</html>
